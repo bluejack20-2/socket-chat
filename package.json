@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "20-2 Chat Server",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "socket.io": "^3.0.3",
+    "socket.io-client": "^3.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "autoprefixer": "^9.5.1",
+    "babel-loader": "^8.2.1",
+    "cross-env": "^5.1",
+    "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.0.6",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^6.0.19",
+    "postcss-loader": "^2.1.1",
+    "react-hot-loader": "^4.13.0",
+    "style-loader": "^0.20.3",
+    "tailwindcss": "^1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "scripts": {
+    "dev": "run-p start:* -ln",
+    "start:client": "cross-env NODE_ENV=development webpack-dev-server",
+    "start:server": "nodemon server.js",
+    "build": "cross-env NODE_ENV=production webpack --no-progress"
+  },
+  "author": "20-2",
+  "license": "MIT"
+}
