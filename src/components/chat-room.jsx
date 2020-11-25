@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatList from './chat-list';
 
-const Chat = ({ socket, messages }) => {
+const ChatRoom = ({ socket, username }) => {
   const [text, setText] = useState([]);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on('chat message', msg => setMessages(prev => [...prev, JSON.parse(msg)]));
+    socket.on('user join', msg => setMessages(prev => [...prev, { user: 'System', text: msg, timestamp: Date.now() }]));
+
+    socket.emit('set username', username);
+  }, []);
 
   const handleSend = () => {
     if (!socket || text === '') return;
-    socket.emit('chat message', text);
+    socket.emit('chat message', JSON.stringify({ user: username, text, timestamp: Date.now() }));
     setText('');
   };
 
@@ -17,7 +25,7 @@ const Chat = ({ socket, messages }) => {
   return (
     <section className="min-h-screen flex flex-col">
       <div className="flex-grow bg-gray-200 rounded relative">
-        <ChatList messages={messages} />
+        <ChatList messages={messages} username={username} />
       </div>
 
       <section className="w-full flex">
@@ -27,6 +35,8 @@ const Chat = ({ socket, messages }) => {
           onChange={e => setText(e.target.value)}
           onKeyDown={handleKeyDown}
           className="border border-black rounded p-1 w-full"
+          placeholder={`Chatting as ${username}...`}
+          autoFocus
         />
 
         <button
@@ -40,4 +50,4 @@ const Chat = ({ socket, messages }) => {
   );
 };
 
-export default Chat;
+export default ChatRoom;

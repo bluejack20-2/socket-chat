@@ -1,1 +1,8 @@
 node_modules
+dist
+
+.vscode
+.idea
+
+yarn.lock
+package-lock.json

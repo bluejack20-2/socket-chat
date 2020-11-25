@@ -1,7 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.jsx',
@@ -38,5 +39,9 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
     hot: true,
+  },
+  optimization: {
+    minimize: process.env.NODE_ENV === 'Production',
+    minimizer: [new TerserPlugin()],
   },
 };
