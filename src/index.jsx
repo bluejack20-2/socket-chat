@@ -15,6 +15,7 @@ const Index = () => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
+    console.log(host)
     const socket = io(`http://${host}:3000`);
 
     setSocket(socket);
