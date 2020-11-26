@@ -10,20 +10,21 @@ import Loading from './components/loading';
 
 const Index = () => {
   const [username, setUsername] = useState('');
+  const [host, setHost] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socket = io('http://127.0.0.1:3000');
+    const socket = io(`http://${host}:3000`);
 
     setSocket(socket);
     setIsLoaded(true);
 
     return () => socket.disconnect();
-  }, []);
+  }, [host]);
 
   if (!isLoaded) return <Loading />;
-  if (!username) return <UsernameForm setUsername={setUsername} />;
+  if (!username || !host) return <UsernameForm setUsername={setUsername} setHost={setHost} />;
   return <ChatRoom socket={socket} username={username} />;
 };
 
