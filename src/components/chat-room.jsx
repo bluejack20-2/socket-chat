@@ -32,7 +32,7 @@ const ChatRoom = ({ socket, username }) => {
         <input
           type="text"
           value={text}
-          onChange={e => setText(e.target.value)}
+          onChange={e => setText(e.target.value.trim())}
           onKeyDown={handleKeyDown}
           className="border border-black rounded p-1 w-full"
           placeholder={`Chatting as ${username}...`}
