@@ -15,17 +15,20 @@ const Index = () => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    console.log(host)
-    const socket = io(`http://${host}:3000`);
+    if (host) {
+      console.log(host);
+      const socket = io(`http://${host}:3000`);
 
-    setSocket(socket);
-    setIsLoaded(true);
+      setSocket(socket);
+      setIsLoaded(true);
 
-    return () => socket.disconnect();
+      return () => socket.disconnect();
+    }
+
   }, [host]);
 
-  if (!isLoaded) return <Loading />;
   if (!username || !host) return <UsernameForm setUsername={setUsername} setHost={setHost} />;
+  if (!isLoaded) return <Loading />;
   return <ChatRoom socket={socket} username={username} />;
 };
 

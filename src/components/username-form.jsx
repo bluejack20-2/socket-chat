@@ -29,7 +29,6 @@ const UsernameForm = ({ setUsername, setHost }) => {
           value={tempHost}
           onChange={e => setTempHost(e.target.value)}
           className="rounded border border-black w-full my-4 p-2"
-          autoFocus
         />
 
         <button
