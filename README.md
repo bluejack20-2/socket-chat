@@ -1,6 +1,8 @@
 # 20-2--
 
-`npm run dev` or `yarn dev`
+a. `npm run dev` or `yarn dev` to develop both client and server  
+b. `npm run start:server` to start server and hostname will be printed in the console.  
+c. `npm run start:client` to start client and connect to the printed hostname in the console after server is started.  
 
-Server: `http://localhost:3000`
-Client: `http://localhost:8080`
+Server port: `3000`  
+Client port: `8080`
